@@ -1,0 +1,174 @@
+/* Tournament Bracket Styling */
+.tournament-bracket-container {
+  overflow-x: auto;
+  padding: 20px 0;
+  min-height: 500px;
+}
+
+.tournament-bracket {
+  display: flex;
+  min-width: max-content;
+  transition: transform 0.3s ease;
+  padding: 20px 10px;
+}
+
+.round {
+  display: flex;
+  flex-direction: column;
+  margin-right: 60px; /* Increased for better spacing */
+  min-width: 280px; /* Slightly wider for better match boxes */
+  position: relative;
+}
+
+.round:last-child {
+  margin-right: 0;
+}
+
+.round-header {
+  text-align: center;
+  font-weight: 600;
+  color: #6b7280;
+  margin-bottom: 16px;
+  padding: 8px;
+  background-color: #f3f4f6;
+  border-radius: 6px;
+}
+
+.match-box {
+  position: relative;
+  z-index: 2;
+  background-color: white;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08);
+  margin: 24px 0; /* Default spacing */
+  transition: all 0.2s ease;
+}
+
+/* Different spacing for different rounds to align matches perfectly */
+.round-2 .match-box:nth-child(2) { margin-top: 80px; }
+.round-3 .match-box:nth-child(2) { margin-top: 160px; }
+.round-4 .match-box:nth-child(2) { margin-top: 320px; }
+
+/* Style for player entries */
+.player {
+  transition: all 0.2s ease;
+  position: relative;
+}
+
+.player.winner {
+  background-color: #ecfdf5 !important;
+  border-left: 3px solid #10b981;
+  font-weight: 500;
+}
+
+/* Connecting lines between matches */
+
+/* Horizontal lines extending right from a match */
+.round:not(:last-child) .match-box::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: -60px; /* Match the round margin-right */
+  width: 30px;
+  height: 2px;
+  background-color: #e5e7eb;
+  z-index: 1;
+}
+
+/* Horizontal lines extending left to a match */
+.round:not(:first-child) .match-box::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: -30px;
+  width: 30px;
+  height: 2px;
+  background-color: #e5e7eb;
+  z-index: 1;
+}
+
+/* Vertical lines connecting matches in rounds 2+ */
+.round:not(:first-child) .match-box:nth-child(odd)::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: -30px;
+  width: 2px;
+  height: calc(100% + 48px); /* Connect to the match below */
+  background-color: #e5e7eb;
+  z-index: 1;
+  transform: translateY(-100%);
+}
+
+.round:not(:first-child) .match-box:nth-child(even)::before {
+  content: "";
+  position: absolute;
+  bottom: 50%;
+  left: -30px;
+  width: 2px;
+  height: calc(100% + 48px); /* Connect to the match above */
+  background-color: #e5e7eb;
+  z-index: 1;
+}
+
+/* Special style for final match */
+.round:last-child .match-box {
+  border-color: #fcd34d;
+  background-color: #fffbeb;
+}
+
+.round:last-child .round-header {
+  background-color: #fef3c7;
+  color: #92400e;
+}
+
+/* Highlight current matches */
+.match-box:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.12);
+}
+
+/* Special styling for completed matches */
+.match-box[data-winner]:not([data-winner=""]) {
+  border-right: 3px solid #10b981;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .tournament-bracket-container {
+    padding: 10px 0;
+  }
+  
+  .round {
+    margin-right: 40px;
+    min-width: 240px;
+  }
+  
+  .round:not(:first-child) .match-box::after,
+  .round:not(:last-child) .match-box::before {
+    width: 20px;
+  }
+  
+  .round:not(:first-child) .match-box::after {
+    left: -20px;
+  }
+  
+  .round:not(:last-child) .match-box::before {
+    right: -40px;
+  }
+  
+  .round:not(:first-child) .match-box:nth-child(odd)::before,
+  .round:not(:first-child) .match-box:nth-child(even)::before {
+    left: -20px;
+  }
+}
+
+/* Animation for winner indicator */
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+  100% { transform: scale(1); }
+}
+
+.match-box[data-winner]:not([data-winner=""]) .winner {
+  animation: pulse 2s infinite;
+} 
