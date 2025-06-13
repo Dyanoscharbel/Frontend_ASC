@@ -1,0 +1,378 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 250 33% 98%;
+    --foreground: 240 10% 4%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 240 10% 4%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 240 10% 4%;
+
+    --primary: 252 86% 75%;
+    --primary-foreground: 210 40% 98%;
+
+    --secondary: 260 36% 54%;
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 260 20% 96%;
+    --muted-foreground: 240 5% 45%;
+
+    --accent: 32 95% 53%;
+    --accent-foreground: 210 40% 98%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 260 20% 92%;
+    --input: 260 20% 92%;
+    --ring: 252 86% 75%;
+
+    --radius: 0.5rem;
+
+    --sidebar-background: 250 33% 98%;
+    --sidebar-foreground: 240 10% 4%;
+    --sidebar-primary: 252 86% 75%;
+    --sidebar-primary-foreground: 210 40% 98%;
+    --sidebar-accent: 260 20% 96%;
+    --sidebar-accent-foreground: 240 10% 4%;
+    --sidebar-border: 260 20% 92%;
+    --sidebar-ring: 252 86% 75%;
+  }
+
+  .dark {
+    --background: 240 10% 4%;
+    --foreground: 210 40% 98%;
+
+    --card: 240 10% 8%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 240 10% 8%;
+    --popover-foreground: 210 40% 98%;
+
+    --primary: 252 86% 75%;
+    --primary-foreground: 240 10% 4%;
+
+    --secondary: 260 36% 54%;
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 240 10% 15%;
+    --muted-foreground: 240 5% 65%;
+
+    --accent: 32 95% 53%;
+    --accent-foreground: 240 10% 4%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 240 10% 15%;
+    --input: 240 10% 15%;
+    --ring: 252 86% 75%;
+
+    --sidebar-background: 240 10% 8%;
+    --sidebar-foreground: 210 40% 98%;
+    --sidebar-primary: 252 86% 75%;
+    --sidebar-primary-foreground: 240 10% 4%;
+    --sidebar-accent: 240 10% 15%;
+    --sidebar-accent-foreground: 210 40% 98%;
+    --sidebar-border: 240 10% 15%;
+    --sidebar-ring: 252 86% 75%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans;
+  }
+}
+
+.badge-status {
+  @apply text-xs font-medium px-2.5 py-0.5 rounded-full;
+}
+.badge-open {
+  @apply badge-status bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300;
+}
+.badge-in-progress {
+  @apply badge-status bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-300;
+}
+.badge-complete {
+  @apply badge-status bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-300;
+}
+.badge-upcoming {
+  @apply badge-status bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-300;
+}
+
+.sponsor-card {
+  @apply relative p-6 rounded-lg border shadow-md transition-all duration-300;
+}
+.sponsor-card:hover {
+  @apply shadow-lg -translate-y-1;
+}
+
+.gradient-text {
+  @apply bg-gradient-to-r from-asc-purple to-asc-blue text-transparent bg-clip-text;
+}
+
+.hero-pattern {
+  background-color: #f8f7ff;
+  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%239b87f5' fill-opacity='0.12'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+}
+.dark .hero-pattern {
+  background-color: #121212;
+  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%239b87f5' fill-opacity='0.12'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+}
+
+.tournament-bracket-container {
+  width: 100%;
+  height: 800px;
+  overflow: auto;
+  border: 1px solid #e5e7eb;
+  border-radius: 0.5rem;
+  background-color: #f9fafb;
+  padding: 1rem;
+  position: relative;
+}
+
+.tournament-bracket {
+  display: flex;
+  flex-direction: row;
+  gap: 4rem;
+  padding: 2rem;
+  min-width: max-content;
+  position: relative;
+}
+
+.round {
+  display: flex;
+  flex-direction: column;
+  gap: 5rem;
+  min-width: 250px;
+  position: relative;
+}
+
+.round-header {
+  text-align: center;
+  font-weight: 600;
+  color: #6366f1;
+  margin-bottom: 1rem;
+  padding: 0.5rem;
+  border-radius: 0.25rem;
+  background-color: #f1f5f9;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  letter-spacing: 0.05em;
+}
+
+.match-box {
+  width: 100%;
+  position: relative;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  margin-bottom: 2rem;
+}
+
+.match-box:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  z-index: 10;
+}
+
+/* Styles pour les lignes horizontales (droite de chaque match) */
+.match-box::after {
+  content: '';
+  position: absolute;
+  right: -4rem;
+  top: 50%;
+  width: 4rem;
+  height: 2px;
+  background: #e5e7eb;
+  z-index: 1;
+}
+
+.match-box[data-winner]::after {
+  background: linear-gradient(to right, #10b981, #059669);
+  height: 3px;
+}
+
+.round:last-child .match-box::after {
+  display: none;
+}
+
+/* Lignes verticales de connection entre les tours */
+.round:not(:first-child)::before {
+  content: '';
+  position: absolute;
+  left: -2rem;
+  height: 100%;
+  width: 2px;
+  background: #e5e7eb;
+  z-index: 0;
+}
+
+/* Lignes horizontales (gauche de chaque match sauf premier tour) */
+.match-box:not(:only-child)::before {
+  content: '';
+  position: absolute;
+  left: -2rem;
+  top: 50%;
+  width: 2rem;
+  height: 2px;
+  background: #e5e7eb;
+}
+
+/* Lignes pour les différents tours */
+.round-1 .match-box:nth-child(odd)::before {
+  display: none;
+}
+
+.round-2 .match-box::before,
+.round-3 .match-box::before,
+.round-4 .match-box::before,
+.round-5 .match-box::before,
+.round-6 .match-box::before {
+  content: '';
+  position: absolute;
+  left: -2rem;
+  top: 50%;
+  width: 2rem;
+  height: 2px;
+  background: #e5e7eb;
+}
+
+/* Styles pour le gagnant */
+.match-box[data-winner]::before {
+  background: linear-gradient(to right, #059669, #10b981);
+  height: 3px;
+}
+
+/* Style pour la finale (dernier match) */
+.round:last-child .match-box {
+  background-color: #f0fdf4;
+  border-color: #86efac;
+  border-width: 2px;
+}
+
+/* Styles pour les statuts des matchs */
+.match-box.bg-green-50 {
+  border-color: #10b981 !important;
+  border-width: 2px;
+}
+
+.match-box.bg-blue-50 {
+  border-color: #3b82f6 !important;
+  border-width: 2px;
+}
+
+/* Connecteurs spécifiques pour chaque niveau de l'arbre */
+.tournament-bracket .round:not(:first-child):not(:last-child)::after {
+  content: '';
+  position: absolute;
+  left: -2rem;
+  top: 0;
+  height: 100%;
+  width: 0;
+  border-left: 2px dashed rgba(99, 102, 241, 0.2);
+  z-index: -1;
+}
+
+/* Styles pour les joueurs */
+.match-box .player {
+  transition: all 0.2s ease;
+  position: relative;
+}
+
+.match-box .player:hover {
+  background-color: #f8fafc !important;
+}
+
+/* Affichage du vainqueur */
+.match-box .player.winner {
+  background-color: #dcfce7 !important;
+  border-left: 3px solid #10b981;
+}
+
+/* Ajustements pour les différents tours */
+.round:nth-child(1) .match-box {
+  margin-bottom: 4rem;
+}
+
+.round:nth-child(2) .match-box {
+  margin-bottom: 8rem;
+}
+
+.round:nth-child(3) .match-box,
+.round:nth-child(4) .match-box,
+.round:nth-child(5) .match-box {
+  margin-bottom: 12rem;
+}
+
+@media (max-width: 768px) {
+  .tournament-bracket {
+    padding: 1rem;
+    gap: 2rem;
+  }
+
+  .round {
+    min-width: 200px;
+  }
+
+  .match-box::after {
+    right: -2rem;
+    width: 2rem;
+  }
+  
+  .round:not(:first-child)::before {
+    left: -1rem;
+  }
+  
+  .match-box::before {
+    left: -1rem;
+    width: 1rem;
+  }
+}
+
+/* Custom Scrollbar */
+.tournament-bracket-container::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.tournament-bracket-container::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+
+.tournament-bracket-container::-webkit-scrollbar-thumb {
+  background-color: #d1d5db;
+  border-radius: 10px;
+}
+
+.tournament-bracket-container::-webkit-scrollbar-thumb:hover {
+  background-color: #9ca3af;
+}
+
+/* Firefox */
+.tournament-bracket-container {
+  scrollbar-width: thin;
+  scrollbar-color: #d1d5db #f1f1f1;
+}
+
+/* Ajout d'un arrière-plan global pour l'arbre */
+.tournament-bracket::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23d1d5db' fill-opacity='0.1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  z-index: -1;
+  pointer-events: none;
+}
